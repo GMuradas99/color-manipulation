@@ -1,1 +1,5 @@
-/results/image_recoloring/
+/results
+/__pycache__
+/eidolonfactory/__pycache__
+/in
+/out

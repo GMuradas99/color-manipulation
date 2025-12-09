@@ -184,3 +184,29 @@ def correlation_test(x, y, figpath, title="", x_label="", y_label="", figsize=(2
     print(x_label, "vs.", y_label, " (", len(x), "images):", "Pearson", r, "p", r_p_value, ", Spearman", s, "p",
           s_p_value)
     return (r, r_p_value, s, s_p_value), ax
+
+def resize_max_dim(img, target_size):
+    """
+    Resize an image so its largest dimension becomes `target_size`
+    without changing aspect ratio (no warping).
+
+    Parameters
+    ----------
+    img : np.ndarray
+        Input image (BGR)
+    target_size : int
+        The desired size of the largest dimension (width or height)
+
+    Returns
+    -------
+    resized : np.ndarray
+        Resized image
+    """
+    h, w = img.shape[:2]
+    scale = target_size / max(h, w)
+
+    new_w = int(w * scale)
+    new_h = int(h * scale)
+
+    resized = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_AREA)
+    return resized
